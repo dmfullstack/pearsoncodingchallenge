@@ -1,6 +1,9 @@
 package com.pearson.codingchallenge.bean;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * This class holds store structure retrieved from stores data csv file
@@ -8,11 +11,13 @@ import java.util.Date;
  * @author swaonkar
  *
  */
-public class StoreData {
+public class StoreData implements Serializable{
+	private static final String DATE_FORMAT ="dd/MM/yyyy";
 	private String storeId;
 	private String postCode;
 	private String city;
 	private String address;
+	@JsonFormat(pattern=DATE_FORMAT)
 	private Date openedDate;
 	private int openedDays;
 	
@@ -73,4 +78,10 @@ public class StoreData {
 	public void setOpenedDays(int openedDays) {
 		this.openedDays = openedDays;
 	}
+
+	public StoreData() {
+		super();
+	}
+	
+	
 }

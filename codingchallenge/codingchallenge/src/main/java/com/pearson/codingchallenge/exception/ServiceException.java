@@ -5,7 +5,7 @@ package com.pearson.codingchallenge.exception;
  * @author swaonkar
  *
  */
-public class ServiceException extends Exception{
+public class ServiceException extends RuntimeException{
 
 	public ServiceException() {
 		super();

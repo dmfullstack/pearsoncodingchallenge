@@ -19,7 +19,7 @@ public enum OrderByEnum {
 			return null;
 		}
 		for (OrderByEnum e : OrderByEnum.values()) {
-			if (e.equals(code)) {
+			if (e.code.equals(code)) {
 				return e;
 			}
 		}

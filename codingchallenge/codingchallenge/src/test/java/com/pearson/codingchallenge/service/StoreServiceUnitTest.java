@@ -60,11 +60,10 @@ public class StoreServiceUnitTest {
 		assertEquals("test store1", storeFound.getAddress());
 	}
 
-	@Test
+	@Test(expected=ServiceException.class)
 	public void testGetStoreByIdInvalidStoreId() throws IOException, ServiceException {
 		Mockito.when(csvReaderUtility.readCsvFile()).thenReturn(storeDataList);
 		StoreData storeFound = storeService.getStoreById("store123");
-		assertNull(storeFound);
 	}
 	
 	@Test(expected=ServiceException.class)

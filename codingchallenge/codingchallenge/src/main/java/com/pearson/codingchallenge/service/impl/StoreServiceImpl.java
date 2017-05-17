@@ -33,7 +33,12 @@ public class StoreServiceImpl implements StoreService {
 		List<StoreData> storeDataList = null;
 		try {
 			storeDataList = csvReaderUtility.readCsvFile();
-			return storeDataList.stream().filter(storeData -> storeData.getStoreId().equals(id)).findAny().orElse(null);
+			StoreData machingStoreData = storeDataList.stream().filter(storeData -> storeData.getStoreId().equals(id))
+					.findAny().orElse(null);
+			if (machingStoreData == null) {
+				throw new ServiceException("Store with id" + id + " does not exist");
+			}
+			return machingStoreData;
 		} catch (IOException e) {
 			LOG.debug("Error while reading stores data from file");
 			throw new ServiceException("Error while reading stores data from file");
