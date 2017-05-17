@@ -1,6 +1,7 @@
 # pearsoncodingchallenge
 
-This application implements RESTFull service in java.
+This application implements RESTFull service using java and spring.
+This is spring boot application with embedded tomcat server.
 
 How to run application:
 Prerequisites:Maven,java1.8
