@@ -48,7 +48,7 @@ public class CsvReaderUtility {
 	 * read store data from csv file name specified in config properties file
 	 * 
 	 * @return list of storedata objects
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public List<StoreData> readCsvFile() throws IOException {
 		CSVParser csvFileParser = null;
@@ -74,6 +74,7 @@ public class CsvReaderUtility {
 				LOG.error("Error parsing record with store id" + record.get(STORE_ID));
 			}
 		}
+		fileReader.close();
 		return storeDataList;
 	}
 }
