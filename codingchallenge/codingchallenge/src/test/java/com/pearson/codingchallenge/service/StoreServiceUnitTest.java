@@ -31,8 +31,15 @@ public class StoreServiceUnitTest {
 
 	@Mock
 	private CsvReaderUtility csvReaderUtility;
+	
 	@InjectMocks
-	private StoreServiceImpl storeService = new StoreServiceImpl();
+	private StoreServiceImpl storeService = new StoreServiceImpl(){
+
+		@Override
+		public List<StoreData> getStoreDataCached() {
+			return null;
+		}		
+	};
 	private static final String DATE_FORMAT = "dd/MM/yyyy";
 	private static final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 

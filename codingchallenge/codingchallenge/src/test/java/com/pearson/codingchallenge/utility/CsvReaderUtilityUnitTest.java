@@ -11,17 +11,36 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.pearson.codingchallenge.bean.StoreData;
+
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CsvReaderUtilityUnitTest {
 	private static final String DATE_FORMAT = "dd/MM/yyyy";
 	private static final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 
-	CsvReaderUtility csvReaderUtility = new CsvReaderUtility();
+	@Mock
+	private CacheManager cacheManager;	
+	
+	@Mock
+	private Cache storeCache;
+	
+	@InjectMocks
+	CsvReaderUtility csvReaderUtility = new CsvReaderUtility(){
+		@Override
+		protected void cacheStoreDataList(List<StoreData> storeDataList) {
+			//do nothing
+		}
+		
+	};
 
 	@Test(expected=IOException.class)
 	public void testReadCsvFileWithoutFileOnsystem() throws ParseException, IOException {
@@ -33,6 +52,8 @@ public class CsvReaderUtilityUnitTest {
 	@Test
 	public void testReadCsvFile() throws ParseException, IOException {
 		ReflectionTestUtils.setField(csvReaderUtility, "storesCsvFileName", "teststores.csv");
+		Mockito.when(cacheManager.getCache("Stores")).thenReturn(storeCache);
+		
 		List<StoreData> storeDataList = csvReaderUtility.readCsvFile();
 		assertEquals(3, storeDataList.size());
 		StoreData storeData = storeDataList.get(0);

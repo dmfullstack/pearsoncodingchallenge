@@ -15,12 +15,19 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.log4j.Logger;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import com.pearson.codingchallenge.bean.StoreData;
+
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
 
 /**
  * This is helper class to read ,parse stores csv file
@@ -30,6 +37,7 @@ import com.pearson.codingchallenge.bean.StoreData;
  */
 @Component
 @PropertySource("classpath:config.properties")
+@CacheConfig(cacheNames="stores")
 public class CsvReaderUtility {
 	private static final String[] FILE_HEADER_MAPPING = { "Store Id", "Post Code", "City", "Address", "Opened Date" };
 	private static final String STORE_ID = "Store Id";
@@ -43,6 +51,9 @@ public class CsvReaderUtility {
 
 	@Value("${stores.csv.filename}")
 	private String storesCsvFileName;
+	
+	@Autowired
+	private CacheManager cacheManager;
 
 	/**
 	 * read store data from csv file name specified in config properties file
@@ -50,6 +61,7 @@ public class CsvReaderUtility {
 	 * @return list of storedata objects
 	 * @throws IOException
 	 */
+	@Cacheable
 	public List<StoreData> readCsvFile() throws IOException {
 		CSVParser csvFileParser = null;
 		CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
@@ -75,6 +87,14 @@ public class CsvReaderUtility {
 			}
 		}
 		fileReader.close();
+		
+		cacheStoreDataList(storeDataList);
 		return storeDataList;
+	}
+
+	protected void cacheStoreDataList(List<StoreData> storeDataList) {
+		if(!CollectionUtils.isEmpty(storeDataList)){
+			cacheManager.getCache("stores").put(new Element("storesList", storeDataList));
+		}
 	}
 }
