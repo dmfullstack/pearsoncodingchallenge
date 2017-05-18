@@ -23,7 +23,7 @@ public class StoreServiceImpl implements StoreService {
 	private static final Logger LOG = Logger.getLogger(StoreServiceImpl.class);
 
 	/**
-	 * {{@inheritDoc}
+	 * {@inheritDoc}
 	 */
 	public StoreData getStoreById(String id) throws ServiceException {
 		if (id == null) {
@@ -78,7 +78,7 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	/**
-	 * {{@inheritDoc}
+	 * {@inheritDoc}
 	 */
 	public void createStore(StoreData store) {
 		// TODO:Add implementation
