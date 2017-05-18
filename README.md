@@ -3,10 +3,11 @@
 This application implements RESTFull service using java and spring.
 This is spring boot application with embedded tomcat server.
 
-How to run application:
+# How to run application:
 Prerequisites:Maven,java1.8
 
-steps:
+# steps:
+
 1)clone repository
 
 2)cd to repository home
@@ -16,7 +17,7 @@ steps:
 4)run command : mvn clean install spring-boot:run
 
 
-Endpoints available:
+# Endpoints available:
 
 1)To retrieve all stores (if orderBy param is not given default sort is by CITY)
 
