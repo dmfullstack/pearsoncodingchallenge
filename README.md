@@ -7,10 +7,10 @@ How to run application:
 Prerequisites:Maven,java1.8
 
 steps:
-1.clone repository
-2.cd to repository home
-3.cd codingchallenge/codingchallenge
-4.run command : mvn clean install spring-boot:run
+1)clone repository
+2)cd to repository home
+3)cd codingchallenge/codingchallenge
+4)run command : mvn clean install spring-boot:run
 
 Endpoints available:
 
