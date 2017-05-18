@@ -37,4 +37,5 @@ example for request body:
   "storeId": "testStore"
 }
 
-Note:Stores details from stores.csv are cached for 1 hr. So any changes made in stores.csv wont be picked up when endpoints are called
+#Notes:
+Stores details from stores.csv are cached for 1 hr. So any changes made in stores.csv wont be picked up when endpoints are called
