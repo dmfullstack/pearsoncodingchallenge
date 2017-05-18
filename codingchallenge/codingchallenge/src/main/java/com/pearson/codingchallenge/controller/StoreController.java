@@ -27,14 +27,14 @@ public class StoreController {
 	private StoreService storeService;
 	private static Logger LOG = Logger.getLogger(StoreController.class);
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.FOUND)
 	public StoreData getStoreById(@PathVariable String id) throws ServiceException {
 		LOG.debug("getStoreById API called");
 		return storeService.getStoreById(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(method = RequestMethod.GET)
 	@ResponseStatus( HttpStatus.OK )
 	public List<StoreData> getStores(@RequestParam(required=false,defaultValue="CITY") String orderBy) throws ServiceException {
 		OrderByEnum orderByEnum = OrderByEnum.getOrderByEnumFromCode(orderBy);
