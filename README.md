@@ -15,14 +15,18 @@ steps:
 Endpoints available:
 
 1)To retrieve all stores (if orderBy param is not given default sort is by CITY)
+
 localhost:8080/stores?orderBy=CITY (GET)
 localhost:8080/stores?orderBy=OPENED_DATE (GET)
 
 2)To retrieve single store by id
+
 localhost:8080/{id} (GET)
 
 3)To create store
+
 localhost:8080/stores (POST), requestbody storedata json 
+
 example for request body:
 {
   "storeId": "testStore"
